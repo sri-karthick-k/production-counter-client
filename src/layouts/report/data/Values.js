@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import config from "config";
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 function Values(selectedDevice) {
   console.log(selectedDevice);
   console.log("hi");
@@ -24,7 +27,11 @@ function Values(selectedDevice) {
   
         const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevReport}`, {
           headers: {
+<<<<<<< HEAD
             device_id: selectedDevice,
+=======
+            device_id: selectedDevice.value,
+>>>>>>> main
           },
         });
 
@@ -47,4 +54,8 @@ function Values(selectedDevice) {
   
   return data;
 }
+<<<<<<< HEAD
 export default Values;
+=======
+export default Values;
+>>>>>>> main
