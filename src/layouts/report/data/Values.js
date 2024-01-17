@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import config from "config";
-export default function Data(selectedDevice) {
+
+function Values(selectedDevice) {
+  console.log(selectedDevice);
+  console.log("hi");
   const [data, setData] = useState({
     columns: [
       { Header: "device Id", accessor: "mac", width: "45%", align: "left" },
@@ -14,9 +17,14 @@ export default function Data(selectedDevice) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+          // Perform a null check before accessing the value property
+         // if (!selectedDevice || !selectedDevice.value) {
+           // return;
+         // }
+  
         const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevReport}`, {
           headers: {
-            device_id: selectedDevice.value,
+            device_id: selectedDevice,
           },
         });
 
@@ -39,3 +47,4 @@ export default function Data(selectedDevice) {
   
   return data;
 }
+export default Values;
