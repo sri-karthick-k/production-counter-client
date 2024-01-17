@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import config from "config";
-function Values(selectedDevice) {
-  console.log(selectedDevice);
-  console.log("hi");
+
 function Values(selectedDevice) {
   console.log(selectedDevice);
   console.log("hi");
@@ -48,5 +46,5 @@ function Values(selectedDevice) {
   }, [selectedDevice]);
   
   return data;
-}}
+}
 export default Values;
