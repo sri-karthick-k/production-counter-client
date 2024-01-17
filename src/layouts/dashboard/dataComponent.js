@@ -103,7 +103,7 @@ const DataComponent = ({data})=>{
             todaySensorValue(data.device_id)
         }
 
-        setInterval(updateVal, 2000);
+        setInterval(updateVal, 1000);
     },[])
     
     const handleName = ()=>{

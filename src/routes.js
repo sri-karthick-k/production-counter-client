@@ -21,7 +21,7 @@ const routes = [
     name: "Add Devices",
     key: "tables",
     icon: <Icon fontSize="small">add_circle</Icon>,
-    route: "/front/tables",
+    route: "/front/Add-Device",
     component: <Tables />,
   },
   {
