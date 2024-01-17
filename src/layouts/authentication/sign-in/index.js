@@ -60,7 +60,7 @@ function Basic() {
                         window.location.href = "/dashboard"
                     }
                   } else {
-                    console.error(`HTTP error! Status: ${response.status}`);
+                    alert('Something Went Wrong !');
                   }
         } else {
             console.error('Error:', response.statusText);
@@ -81,7 +81,7 @@ function Basic() {
     // -------------------------------------------------
 
     if(isAuthenticated()) {
-      return <Navigate to='/get-devices'/>
+      return <Navigate to='/dashboard'/>
     } else{
       return (
         <BasicLayout>

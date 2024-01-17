@@ -41,7 +41,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React helper functions
-import gradientChartLine from "assets/theme/functions/gradientChartLine";
+import gradientChartLine from "assets/theme/functions/gradientChaine";
 
 // GradientLineChart configurations
 import configs from "examples/Charts/LineCharts/GradientLineChart/configs";

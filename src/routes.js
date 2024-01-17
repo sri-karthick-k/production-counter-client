@@ -1,11 +1,7 @@
 
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
-import Billing from "layouts/billing";
 
-import Notifications from "layouts/notifications";
-import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Report from "layouts/report";
 // @mui icons
@@ -17,19 +13,20 @@ const routes = [
     name: "Dashboard",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
+    route: "/front/dashboard",
     component: <Dashboard />,
   },
   {
     type: "collapse",
-    name: "Tables",
+    name: "Add Devices",
     key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
+    icon: <Icon fontSize="small">add_circle</Icon>,
+    route: "/front/tables",
     component: <Tables />,
   },
   {
     type: "collapse",
+<<<<<<< Updated upstream
     name: "Billing",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
@@ -70,9 +67,12 @@ const routes = [
   {
     type: "collapse",
     name: "Sign Up",
+=======
+    name: "Create User",
+>>>>>>> Stashed changes
     key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/front/create-user",
     component: <SignUp />,
   },
 ];

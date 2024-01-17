@@ -27,17 +27,16 @@ import MDBox from "components/MDBox";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
-// Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
+
 
 function CoverLayout({ coverHeight, image, children }) {
   return (
     <PageLayout>
       <DefaultNavbar
         action={{
-          type: "external",
-          route: "https://creative-tim.com/product/material-dashboard-react",
-          label: "free download",
+          type: "internal",
+          route: "/logout",
+          label: "Logout",
         }}
         transparent
         light
@@ -69,7 +68,6 @@ function CoverLayout({ coverHeight, image, children }) {
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </PageLayout>
   );
 }

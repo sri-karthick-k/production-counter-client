@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -34,6 +34,9 @@ import brandDark from "assets/images/logo-ct-dark.png";
 
 // Logout
 import Logout from "layouts/authentication/sign-in/logout";
+
+// Login
+import SignIn from "layouts/authentication/sign-in"
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -138,8 +141,9 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="/logout" element={<Logout/>} />
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="/front/login" element={<SignIn/>} />
+        <Route path="/front/logout" element={<Logout/>} />
+        <Route path="*" element={<Navigate to="/front/dashboard" />} />
       </Routes>
     </ThemeProvider>
   );
