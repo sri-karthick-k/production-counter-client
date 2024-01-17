@@ -41,7 +41,7 @@ const Devices = ()=>{
 
 
     return(
-        <div style={{display:'flex',flexWrap: 'wrap'}}>
+        <div style={{display:'flex',flexWrap: 'wrap',justifyContent:'space-evenly'}}>
                 {devices.length<=0 ? (<h1>Loading...</h1>):(
                     <>
                     {devices.map((val, id)=>{

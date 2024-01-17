@@ -16,7 +16,7 @@ export default function Data(selectedDevice) {
       try {
         const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevReport}`, {
           headers: {
-            device_id: selectedDevice.device_id,
+            device_id: selectedDevice.value,
           },
         });
 

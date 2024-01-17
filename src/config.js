@@ -12,7 +12,8 @@ const config = {
       getMax: '/api/device-max',
       getSensorValue: '/api/get-sensor-value',
       getCurrentDaySensorValue: '/api/current-day-sensor-value',
-      getDevReport: '/api/device-report'
+      getDevReport: '/api/device-report',
+      deviceName:'/api/device-name'
     }
   };
 
