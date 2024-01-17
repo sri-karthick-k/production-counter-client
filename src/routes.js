@@ -1,7 +1,7 @@
 
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
-
+import Report from "layouts/report";
 import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons

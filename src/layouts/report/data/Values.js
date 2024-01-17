@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import config from "config";
 export default function Data(selectedDevice) {
   const [data, setData] = useState({
     columns: [
@@ -14,7 +14,7 @@ export default function Data(selectedDevice) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://192.46.211.177:4001/api/device-report", {
+        const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevReport}`, {
           headers: {
             device_id: selectedDevice.value,
           },
@@ -36,6 +36,6 @@ export default function Data(selectedDevice) {
 
     fetchData();
   }, [selectedDevice]);
-
+  
   return data;
 }

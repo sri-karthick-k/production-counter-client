@@ -3,6 +3,8 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import Select from "react-select";
+import config from "config";
+
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -11,7 +13,6 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
@@ -30,7 +31,7 @@ function Report() {
   // Function to fetch devices
   const fetchDevices = async () => {
     try {
-      const response = await fetch("http://192.46.211.177:4001/api/get-devices", {
+      const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevices}`, {
         headers: {
           user_id: 1,
         },
@@ -91,7 +92,7 @@ function Report() {
           <Grid item xs={12} md={8}>
             <Select
               options={deviceOptions}
-              onChange={(selectedOption) => setSelectedDevice(selectedOption.value)}
+              onChange={(selectedOption) => setSelectedDevice(selectedOption?.value)}
               placeholder="Select a device"
               isSearchable
               styles={customStyles}
@@ -135,7 +136,6 @@ function Report() {
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }
