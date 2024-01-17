@@ -3,6 +3,9 @@ import config from "config";
 function Values(selectedDevice) {
   console.log(selectedDevice);
   console.log("hi");
+function Values(selectedDevice) {
+  console.log(selectedDevice);
+  console.log("hi");
   const [data, setData] = useState({
     columns: [
       { Header: "device Id", accessor: "mac", width: "45%", align: "left" },
@@ -45,5 +48,5 @@ function Values(selectedDevice) {
   }, [selectedDevice]);
   
   return data;
-}
+}}
 export default Values;
