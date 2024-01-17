@@ -1,5 +1,7 @@
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -14,8 +16,23 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import values from "layouts/report/data/Values";
 
+// Additional libraries
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
 function Report() {
   const { columns, rows } = values();
+  const [loading, setLoading] = useState(false);
+
+  const generatePdf = () => {
+    setLoading(true);
+
+    const pdfDoc = new jsPDF();
+    pdfDoc.autoTable({ head: [columns.map((col) => col.Header)], body: rows.map(row => Object.values(row)) });
+    pdfDoc.save("report.pdf");
+
+    setLoading(false);
+  };
 
   return (
     <DashboardLayout>
@@ -46,6 +63,14 @@ function Report() {
                   showTotalEntries={false}
                   noEndBorder
                 />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={generatePdf}
+                  disabled={loading}
+                >
+                  {loading ? "Generating PDF..." : "Generate PDF"}
+                </Button>
               </MDBox>
             </Card>
           </Grid>

@@ -1,68 +1,40 @@
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
+import { useEffect, useState } from 'react';
 
-export default function data() {
-  const Author = ({ image, name, email }) => (
-    <MDBox display="flex" alignItems="center" lineHeight={1}>
-      <MDAvatar src={image} name={name} size="sm" />
-      <MDBox ml={2} lineHeight={1}>
-        <MDTypography display="block" variant="button" fontWeight="medium">
-          {name}
-        </MDTypography>
-        <MDTypography variant="caption">{email}</MDTypography>
-      </MDBox>
-    </MDBox>
-  );
-
-  const Job = ({ title, description }) => (
-    <MDBox lineHeight={1} textAlign="left">
-      <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
-        {title}
-      </MDTypography>
-      <MDTypography variant="caption">{description}</MDTypography>
-    </MDBox>
-  );
-
-  return {
+export default function Data() {
+  const [data, setData] = useState({
     columns: [
       { Header: "device Id", accessor: "mac", width: "45%", align: "left" },
       { Header: "Name", accessor: "name", align: "left" },
       { Header: "Time", accessor: "timestamp", align: "center" },
       { Header: "Count", accessor: "count", align: "center" },
     ],
+    rows: [],
+  });
 
-    rows: [
-        {
-            "mac": "B0:B2:1C:42:BC:9C",
-            "name": "device 3",
-            "timestamp": "2024-01-13T11:50:58.000Z",
-            "count": 2
-        },
-        {
-            "mac": "B0:B2:1C:42:BC:9C",
-            "name": "device 3",
-            "timestamp": "2024-01-13T11:50:59.000Z",
-            "count": 3
-        },
-        {
-            "mac": "B0:B2:1C:42:BC:9C",
-            "name": "device 3",
-            "timestamp": "2024-01-14T14:50:59.000Z",
-            "count": 4
-        },
-        {
-            "mac": "B0:B2:1C:42:BC:9C",
-            "name": "device 3",
-            "timestamp": "2024-01-15T15:00:02.180Z",
-            "count": 5
-        },
-        {
-            "mac": "B0:B2:1C:42:BC:9C",
-            "name": "device 3",
-            "timestamp": "2024-01-17T14:50:59.000Z",
-            "count": 6
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://192.46.211.177:4001/api/device-report', {
+          headers: {
+            device_id: 'B0:B2:1C:42:BC:9C'
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
         }
-    ],
-  };
+
+        const jsonData = await response.json();
+        setData({
+          ...data,
+          rows: jsonData,
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run the effect only once on component mount
+
+  return data;
 }
