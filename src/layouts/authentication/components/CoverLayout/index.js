@@ -35,7 +35,7 @@ function CoverLayout({ coverHeight, image, children }) {
       <DefaultNavbar
         action={{
           type: "internal",
-          route: "/logout",
+          route: "/front/logout",
           label: "Logout",
         }}
         transparent

@@ -193,7 +193,7 @@ const DataComponent = ({data})=>{
             value={sensorValue.count?((sensorValue.count/max)*100):(0)}
             arc={{
                 nbSubArcs: 3,
-                colorArray: ['#5BE12C', '#F5CD19', '#EA4228'],
+                colorArray: ['#F5CD19', '#EA4228','#5BE12C'],
                 width: 0.2,
                 padding: 0.0001
               }}
