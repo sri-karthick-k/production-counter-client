@@ -14,6 +14,23 @@ function Values(selectedDevice) {
     rows: [],
   });
 
+
+  const dateFormatter = (dtData)=>{
+    const originalDate = new Date(dtData);
+            
+      // Format the date as "YYYY-MM-DD"
+      const formattedDate = originalDate.toISOString().split('T')[0];
+      console.log(originalDate)
+      // Format the time as "HH:mm:ss"
+      const formattedTime = originalDate.toLocaleTimeString([], { hour12: false });
+    
+      // Combine date and time
+      console.log(formattedDate,"formattedDate")
+      console.log(formattedTime,"formattedTime")
+      
+      return `${formattedDate} ${formattedTime}`;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,9 +50,16 @@ function Values(selectedDevice) {
         }
 
         const jsonData = await response.json();
+        const decodedData = jsonData.map((data) => ({
+          mac: decodeURIComponent(data.mac),
+          name: decodeURIComponent(data.name),
+          timestamp : dateFormatter(data.timestamp), // Assuming timestamp doesn't need decoding
+          count: data.count, // Assuming count doesn't need decoding
+        }));
+         
         setData({
           ...data,
-          rows: jsonData,
+          rows: decodedData,
         });
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -93,7 +93,19 @@ function Report() {
 
       const jsonData = await response.json();
 
-      const timestamps = jsonData.map((data) => data.timestamp);
+      const timestamps = jsonData.map((data) => {
+        const originalDate = new Date(data.timestamp);
+        
+        // Format the date as "YYYY-MM-DD"
+        const formattedDate = originalDate.toISOString().split('T')[0];
+      
+        // Format the time as "HH:mm:ss"
+        const formattedTime = originalDate.toLocaleTimeString([], { hour12: false });
+      
+        // Combine date and time
+        return `${formattedDate} ${formattedTime}`;
+      });
+      
       const counts = jsonData.map((data) => data.count);
 
       setChartData({
