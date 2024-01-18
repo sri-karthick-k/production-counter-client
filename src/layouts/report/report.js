@@ -34,7 +34,7 @@ function Report() {
       }
 
       const devices = await response.json();
-      return devices.map((device) => ({ value: device.device_id, label: device.name }));
+      return devices.map((device) => ({ value: device.device_id, label: device.name.toUpperCase() }));
     } catch (error) {
       console.error("Error fetching devices:", error);
       return [];
