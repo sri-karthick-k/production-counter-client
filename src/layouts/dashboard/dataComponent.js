@@ -69,8 +69,9 @@ const DataComponent = ({data})=>{
                         setSensorValue(0)
                     }
             
-                } catch{
-                    alert('FrontEnd Error')
+                } catch (e){
+                    // alert('FrontEnd Error')
+                    console.log(e,  " Total count error");
                 }
             }
             getSensorValue(data.device_id)
@@ -96,8 +97,9 @@ const DataComponent = ({data})=>{
                         setTodaySensorValue(0)
                     }
             
-                } catch{
-                    alert('FrontEnd Error')
+                } catch(e){
+                    // alert('FrontEnd Error')
+                    console.log(e, "Today's Sensor count error");
                 }
             }
             todaySensorValue(data.device_id)
