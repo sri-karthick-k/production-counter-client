@@ -126,8 +126,8 @@ const navbarMobileMenu = ({ breakpoints }) => ({
   display: "inline-block",
   lineHeight: 0,
 
-  [breakpoints.up("xl")]: {
-    display: "none",
+  [breakpoints.up("xxxl")]: {
+    // display: "none",
   },
 });
 
