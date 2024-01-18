@@ -19,10 +19,9 @@ import { useMemo } from "react";
 import PropTypes from "prop-types";
 
 // react-chartjs-2 components
-import { Line } from "react-chartjs-2";
+import { Line,Chart as ChartJS,CategoryScale } from "react-chartjs-2";
+// import Chart from 'chart.js/auto';
 import {
-  Chart as ChartJS,
-  CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
