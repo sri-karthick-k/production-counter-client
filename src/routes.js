@@ -2,10 +2,12 @@
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Report from "layouts/report";
+import Dashboard1 from "layouts/dashboard1";
 import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import SpeedIcon from '@mui/icons-material/Speed';
 
 const routes = [
   {
@@ -13,6 +15,14 @@ const routes = [
     name: "Dashboard",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/front/dashboard1",
+    component: <Dashboard1 />,
+  },
+  {
+    type: "collapse",
+    name: "Gauge",
+    key: "gauge",
+    icon: <SpeedIcon />,
     route: "/front/dashboard",
     component: <Dashboard />,
   },
