@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
-import Select from "react-select";
 import config from "config";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import DataTable from "examples/Tables/DataTable";
-import Values from "layouts/report/data/Values";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
 import ReactApexChart from "react-apexcharts";
 
@@ -72,7 +67,7 @@ function Report() {
           const formattedDate = originalDate.toISOString().split('T')[0];
           const formattedTime = originalDate.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' });
           return `${formattedDate} ${formattedTime}`;
-        });        
+        }); 
         const counts = jsonData.map((data) => data.count);
   
         return {
@@ -80,20 +75,62 @@ function Report() {
           deviceName: device.label,
           data: {
             options: {
+              chart: {
+                type: 'line',
+                toolbar: {
+                  show: true
+                },
+                zoom: {
+                  enabled: false // Disabling zoom for a simpler interface
+                }
+              },
+              stroke: {
+                curve: 'straight', // Keeping the line straight for simplicity
+                width: 1 // Narrower lines for a cleaner look
+              },
+              markers: {
+                size: 3, // Smaller markers for a minimalistic design
+                strokeWidth: 0, // No border for markers to keep the design clean
+              },
+              tooltip: {
+                enabled: true,
+                theme: 'light', // A lighter theme for tooltips to match the minimalistic design
+                x: {
+                  format: 'dd MMM, HH:mm'
+                },
+                y: {
+                  formatter: (val) => `${val} counts` // Custom formatter for tooltip content
+                }
+              },
               xaxis: {
                 categories: timestamps,
+                tickAmount: 10, // Defines the approximate number of ticks on the X-axis
+                labels: {
+                  rotate: -45, // Optionally rotate labels to better fit if they are overlapping
+                  trim: true,
+                  minHeight: 100, // Adjust as needed to control spacing
+                }              
+              },
+              yaxis: {
+                labels: {
+                  formatter: (val) => `${val}` // Simplifying y-axis labels
+                }
+              },
+              colors: ['#007bff'], // A single color for a more unified look
+              grid: {
+                show: false // Removing the grid to simplify the background
               },
             },
             series: [
               {
                 name: "Count",
-                data: counts,
+                data: counts
               },
             ],
           },
         };
-
       });
+        
   
       const chartData = await Promise.all(promises);
       setChartData(chartData);

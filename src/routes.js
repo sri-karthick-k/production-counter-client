@@ -2,7 +2,7 @@
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Report from "layouts/report";
-import Dashboard1 from "layouts/dashboard1";
+import GraphPage from "layouts/dashboard1";
 import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
@@ -15,8 +15,8 @@ const routes = [
     name: "Dashboard",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/front/dashboard1",
-    component: <Dashboard1 />,
+    route: "/front/dashboard-graph",
+    component: <GraphPage />,
   },
   {
     type: "collapse",

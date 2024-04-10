@@ -57,7 +57,7 @@ function Basic() {
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('uid', data.uid)
                         localStorage.setItem('role', data.type)
-                        window.location.href = "/dashboard"
+                        window.location.href = "/front/dashboard-graph"
                     }
                   } else {
                     alert('Something Went Wrong !');
@@ -81,7 +81,7 @@ function Basic() {
     // -------------------------------------------------
 
     if(isAuthenticated()) {
-      return <Navigate to='/dashboard'/>
+      return <Navigate to='/front/dashboard-graph'/>
     } else{
       return (
         <BasicLayout>
