@@ -8,17 +8,19 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import "jspdf-autotable";
 import ReactApexChart from "react-apexcharts";
+import Loader from "components/Loading/Loading";
 
 function Report() {
   const [loading, setLoading] = useState(false);
   const [deviceOptions, setDeviceOptions] = useState([]);
   const [chartData, setChartData] = useState([]);
+  const userId = localStorage.getItem('uid')
 
   const fetchDevices = async () => {
     try {
       const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevices}`, {
         headers: {
-          user_id: 1,
+          user_id: userId,
         },
       });
 
@@ -48,28 +50,28 @@ function Report() {
   const generateLineGraphs = async (devices) => {
     try {
       setLoading(true);
-  
+
       const promises = devices.map(async (device) => {
         const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevReport}`, {
           headers: {
             device_id: device.value,
           },
         });
-  
+
         if (!response.ok) {
           throw new Error(`Failed to fetch data for device ${device.label}`);
         }
-  
+
         const jsonData = await response.json();
-  
+
         const timestamps = jsonData.map((data) => {
           const originalDate = new Date(data.timestamp);
           const formattedDate = originalDate.toISOString().split('T')[0];
           const formattedTime = originalDate.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' });
           return `${formattedDate} ${formattedTime}`;
-        }); 
+        });
         const counts = jsonData.map((data) => data.count);
-  
+
         return {
           deviceId: device.value,
           deviceName: device.label,
@@ -109,7 +111,7 @@ function Report() {
                   rotate: -45, // Optionally rotate labels to better fit if they are overlapping
                   trim: true,
                   minHeight: 100, // Adjust as needed to control spacing
-                }              
+                }
               },
               yaxis: {
                 labels: {
@@ -130,8 +132,8 @@ function Report() {
           },
         };
       });
-        
-  
+
+
       const chartData = await Promise.all(promises);
       setChartData(chartData);
     } catch (error) {
@@ -140,41 +142,50 @@ function Report() {
       setLoading(false);
     }
   };
-    
-  
 
-  
+
+
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6} justifyContent="center">
-          {chartData.map((chart, index) => (
-            <Grid item xs={12} md={6} key={index}>
-              <Card>
-                <MDBox
-                  mx={2}
-                  mt={-3}
-                  py={3}
-                  px={2}
-                  variant="gradient"
-                  bgColor="info"
-                  borderRadius="lg"
-                  coloredShadow="info"
-                >
-                  <MDTypography variant="h6" color="white">
-                    {chart.deviceName}
-                  </MDTypography>
-                </MDBox>
-                <MDBox pt={3}>
-                  <ReactApexChart
-                    options={chart.data.options}
-                    series={chart.data.series}
-                  />
-                </MDBox>
-              </Card>
-            </Grid>
-          ))}
+          {
+            loading ? 
+            (<Loader/> ) :
+              chartData.length === 0 ? 
+                (
+                  <h1>No device reports found</h1>
+                ) :
+
+              chartData.map((chart, index) => (
+                <Grid item xs={12} md={6} key={index}>
+                  <Card>
+                    <MDBox
+                      mx={2}
+                      mt={-3}
+                      py={3}
+                      px={2}
+                      variant="gradient"
+                      bgColor="info"
+                      borderRadius="lg"
+                      coloredShadow="info"
+                    >
+                      <MDTypography variant="h6" color="white">
+                        {chart.deviceName}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox pt={3}>
+                      <ReactApexChart
+                        options={chart.data.options}
+                        series={chart.data.series}
+                      />
+                    </MDBox>
+                  </Card>
+                </Grid>
+              ))
+          }
         </Grid>
       </MDBox>
     </DashboardLayout>
