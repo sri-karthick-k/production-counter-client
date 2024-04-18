@@ -4,11 +4,12 @@ import Tables from "layouts/tables";
 import Report from "layouts/report";
 import GraphPage from "layouts/dashboard1";
 import SignUp from "layouts/authentication/sign-up";
+import ListDevices from "layouts/device-list";
+import ListUsers from "layouts/user-list";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
 import SpeedIcon from '@mui/icons-material/Speed';
-import ListDevices from "layouts/device-list";
 
 const routes = [
   {
@@ -58,6 +59,14 @@ const routes = [
     icon: <Icon fontSize="small">developer_board</Icon>,
     route: "/front/list-devices",
     component: <ListDevices />,
+  },
+  {
+    type: "collapse",
+    name: "List Users",
+    key: "list-users",
+    icon: <Icon fontSize="small">people</Icon>,
+    route: "/front/list-users",
+    component: <ListUsers />,
   },
 ];
 
