@@ -104,9 +104,12 @@ const DataComponent = ({data})=>{
             }
             todaySensorValue(data.device_id)
         }
+        const intervalId = setInterval(updateVal, 1000); 
+        return () => {
+            clearInterval(intervalId); 
+        };
 
-        setInterval(updateVal, 1000);
-    },[])
+    },[data.device_id])
     
     const handleName = ()=>{
         

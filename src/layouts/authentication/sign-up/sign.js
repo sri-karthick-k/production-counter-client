@@ -95,16 +95,55 @@ function Sign() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="text" label="Name" variant="standard" fullWidth value={name} onChange={(e)=>{setName(e.target.value)}}/>
+              <MDInput 
+              type="text" 
+              label="Name" 
+              variant="standard" 
+              fullWidth 
+              value={name} 
+              onChange={(e) => {
+                const re = /^[A-Za-z\b]+$/;
+                if (e.target.value === '' || re.test(e.target.value)) {
+                  setName(e.target.value);
+                }
+              }}
+              inputProps={{ maxLength: 20 }}
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="text" label="Mobile" variant="standard" fullWidth value={mob} onChange={(e)=>{setMob(e.target.value)}}/>
+              <MDInput 
+              type="text" 
+              label="Mobile" 
+              variant="standard" 
+              fullWidth 
+              value={mob} 
+              inputProps={{ maxLength: 10 }} 
+              onChange={(e) => {
+                const re = /^[0-9\b]+$/;
+                if (e.target.value === '' || re.test(e.target.value)) {
+                  setMob(e.target.value);
+                }
+              }}
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" variant="standard" fullWidth value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+              <MDInput 
+              type="email" 
+              label="Email" 
+              variant="standard" 
+              fullWidth 
+              value={email} 
+              onChange={(e) => {
+                const re = /^[A-Za-z@.0-9\b]+$/;
+                if (e.target.value === '' || re.test(e.target.value)) {
+                  setEmail(e.target.value);
+                }
+              }}
+              inputProps={{ maxLength: 30 }}
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" variant="standard" fullWidth value={passwd} onChange={(e)=>{setPasswd(e.target.value)}}/>
+              <MDInput type="password" label="Password" variant="standard" fullWidth value={passwd} onChange={(e)=>{setPasswd(e.target.value)}} inputProps={{ maxLength: 30 }}/>
             </MDBox>
             <MDBox mb={2} >
             <div style={{display:'grid',gridTemplateColumns:'1fr 4fr'}}>
