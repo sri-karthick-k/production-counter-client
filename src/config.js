@@ -1,7 +1,7 @@
 const config = {
     server: {
       port: 4001,
-      hostname: 'http://localhost'
+      hostname: 'http://192.46.211.177'
     },
     apiKeys: {
       login: '/api/login',
@@ -14,7 +14,8 @@ const config = {
       getCurrentDaySensorValue: '/api/current-day-sensor-value',
       getDevReport: '/api/device-report',
       deviceName:'/api/device-name',
-      deviceManager: '/api/device-manager'
+      deviceManager: '/api/device-manager',
+      getUserOfSupervisor: '/api/get-user'
     }
   };
 
