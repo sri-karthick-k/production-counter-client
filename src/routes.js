@@ -8,6 +8,7 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import SpeedIcon from '@mui/icons-material/Speed';
+import ListDevices from "layouts/device-list";
 
 const routes = [
   {
@@ -49,6 +50,14 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/front/create-user",
     component: <SignUp />,
+  },
+  {
+    type: "collapse",
+    name: "List Devices",
+    key: "list-devices",
+    icon: <Icon fontSize="small">developer_board</Icon>,
+    route: "/front/list-devices",
+    component: <ListDevices />,
   },
 ];
 
