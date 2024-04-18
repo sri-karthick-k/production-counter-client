@@ -4,9 +4,9 @@ import DataComponent from './dataComponent';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Paper } from '@mui/material';
 
 
-const Devices = () => {
+const Users = () => {
 
-    const [devices, setDevices] = useState([]);
+    const [users, setUsers] = useState([])
     const uid = localStorage.getItem("uid");
     const [loading, setLoading] = useState(true)
 
@@ -14,7 +14,7 @@ const Devices = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getDevices}`, {
+                const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.getUserOfSupervisor}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -23,16 +23,14 @@ const Devices = () => {
                 });
 
                 const data = await response.json();
-
                 if (response.status === 401) {
                     // alert(data['error'])
-                    setLoading(false)
                 }
                 if (response.status === 500) {
                     // alert(data['error'])
                 }
                 if (response.status === 200) {
-                    setDevices(data)
+                    setUsers(data)
                     setLoading(false)
                 }
             } catch {
@@ -50,29 +48,28 @@ const Devices = () => {
             <Table sx={{ minWidth: 650, tableLayout: 'fixed' }} aria-label="device table">
                 <TableBody>
                     <TableRow>
-                        <TableCell style={{ width: '30%' }}><b>Device name</b></TableCell>
-                        <TableCell align="right" style={{ width: '30%' }}><b>Device ID</b></TableCell>
-                        <TableCell align="right" style={{ width: '20%' }}><b>Target</b></TableCell>
-                        <TableCell align="right" style={{ width: '20%' }}><b>Device Manager</b></TableCell>
-                        <TableCell align="right" style={{ width: '20%' }}><b>Delete</b></TableCell>
+                        <TableCell style={{ width: '30%' }}><b>User name</b></TableCell>
+                        <TableCell align="right" style={{ width: '30%' }}><b>Email</b></TableCell>
+                        <TableCell align="right" style={{ width: '20%' }}><b>Mobile</b></TableCell>
                     </TableRow>
                 </TableBody>
                 <TableBody>
                     {
                         loading ? (
                             <TableRow>
-                                <TableCell colSpan={2}>Loading...</TableCell>
+                                <TableCell colSpan={6}>Loading...</TableCell> 
                             </TableRow>
-                        ) : devices.length <= 0 ? (
+                        ) : users.length <= 0 ? (
                             <TableRow>
-                                <TableCell colSpan={2}>No devices available/added</TableCell>
+                                <TableCell colSpan={6}>No users available/added</TableCell>
                             </TableRow>
                         ) : (
-                            devices.map((device, index) => (
-                                <DataComponent data={device} key={device.device_id} />
+                            users.map((user, index) => (
+                                <DataComponent data={user} key={user.uid} />
                             ))
                         )
                     }
+
                 </TableBody>
             </Table>
         </TableContainer>
@@ -80,4 +77,4 @@ const Devices = () => {
 }
 
 
-export default Devices
+export default Users;
