@@ -4,7 +4,7 @@ import { TableCell, TableRow, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const DataComponent = ({ data }) => {
+const DataComponent = ({ data, onDelete }) => {
 
 
     const [max, setMax] = useState('')
@@ -71,8 +71,28 @@ const DataComponent = ({ data }) => {
         updateVal();
     }, [data.device_id])
 
-    const handleDelete = (deviceId) => {
-        console.log(`Delete device with ID: ${deviceId}`);
+    const handleDelete = async(deviceId) => {
+        try {
+            const response = await fetch(`${config.server.hostname}:${config.server.port}${config.apiKeys.deleteDevice}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'device_id': deviceId
+                }
+            });
+
+            const responseJson = await response.json();
+            console.log(responseJson)
+            if (response.status === 200) {
+                alert("Successfully Deleted")
+                onDelete(deviceId)
+            } else if (response.status === 500) {
+                alert("Server error, please try again after some time")
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
     };
 
 

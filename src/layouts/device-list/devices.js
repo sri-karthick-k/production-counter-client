@@ -10,6 +10,10 @@ const Devices = () => {
     const uid = localStorage.getItem("uid");
     const [loading, setLoading] = useState(true)
 
+    const handleDeleteDevice = (deviceId) => {
+        setDevices(currentDevices => currentDevices.filter(device => device.device_id !== deviceId));
+    };
+
     // data
     useEffect(() => {
         const getData = async () => {
@@ -69,7 +73,7 @@ const Devices = () => {
                             </TableRow>
                         ) : (
                             devices.map((device, index) => (
-                                <DataComponent data={device} key={device.device_id} />
+                                <DataComponent data={device} key={device.device_id} onDelete={handleDeleteDevice} />
                             ))
                         )
                     }

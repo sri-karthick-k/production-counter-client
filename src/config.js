@@ -15,7 +15,8 @@ const config = {
       getDevReport: '/api/device-report',
       deviceName:'/api/device-name',
       deviceManager: '/api/device-manager',
-      getUserOfSupervisor: '/api/get-user'
+      getUserOfSupervisor: '/api/get-user',
+      deleteDevice: '/api/device'
     }
   };
 
